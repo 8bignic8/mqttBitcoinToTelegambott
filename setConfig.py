@@ -19,7 +19,7 @@ def findID(token):
         response = requests.post(
             url='https://api.telegram.org/bot{0}/{1}'.format(token, method) #reqets the updates with the token
         ).json()
-        chatID = (((response['result'][1])['message'])['chat'])['id'] #searches in the dict for the chat message token
+        chatID = (((response['result'][0])['message'])['chat'])['id'] #searches in the dict for the chat message token
         print('Your Chat ID is' + str(chatID)) #shows it to the user
         return chatID
     else:
@@ -48,9 +48,8 @@ config = {'myuserid': findID(token),
 
 
 ##Writing JSON with established dict
-try: 
+try:
     with open('config.json', 'w', encoding='utf-8') as f: #writing config.json in utf-8
         json.dump(config, f)
 except:
     print('config file write error')
-
